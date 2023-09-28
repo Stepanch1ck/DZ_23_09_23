@@ -1,10 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace CreativeDZ_23_09
 {
     internal class Program
     {
+        enum DayOfWeek
+        {
+            Monday = 1,
+            Tuesday,
+            Wednesday,
+            Thursday,
+            Friday,
+            Saturday,
+            Sunday
+        };
         static void Main(string[] args)
         {
             Console.WriteLine("Задание 1: Дана последовательность. Определить, является ли эта последовательность упорядоченной по возрастанию.");
@@ -14,7 +26,7 @@ namespace CreativeDZ_23_09
             for (int j = 0; j < arr.Length; j++)
             {
                 arr[j] = rand.Next(10);
-                Console.Write( arr[j] + " ");
+                Console.Write(arr[j] + " ");
             }
             int i = 0;
             for (; i < arr.Length; i++)
@@ -24,9 +36,9 @@ namespace CreativeDZ_23_09
                     break;
                 }
             }
-            if (i <arr.Length-1)
+            if (i < arr.Length - 1)
             {
-                Console.WriteLine($"\nПоследовательность не упорядочена. Порядковый номер числа, которое нарушает последовательность: {i+1}") ;
+                Console.WriteLine($"\nПоследовательность не упорядочена. Порядковый номер числа, которое нарушает последовательность: {i + 1}");
             }
             else
             {
@@ -40,9 +52,9 @@ namespace CreativeDZ_23_09
             try
             {
                 number = int.Parse(Console.ReadLine());
-                if (number < 1 || number > 14)
+                if (number < 6 || number > 14)
                 {
-                    throw new ArgumentException("Неправильный номера карты. Номер должен быть от 1 до 14");
+                    throw new ArgumentException("Неправильный номера карты. Номер должен быть от 6 до 14");
                 }
             }
             catch (FormatException)
@@ -54,14 +66,14 @@ namespace CreativeDZ_23_09
             }
             catch (ArgumentException)
             {
-                Console.WriteLine("Неправильный номера карты. Номер должен быть от 1 до 14");
+                Console.WriteLine("Неправильный номера карты. Номер должен быть от 6 до 14");
                 Console.WriteLine("Нажмите Enter");
                 Console.ReadKey();
                 return;
             }
             try
             {
-                if (number ==14)
+                if (number == 14)
                 {
                     Console.WriteLine("Достоинство карты: Туз");
                 }
@@ -81,7 +93,8 @@ namespace CreativeDZ_23_09
                 {
                     Console.WriteLine($"Достоинство карты {number}");
                 }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 Console.WriteLine("Неизвестная ошибка");
                 Console.WriteLine("Нажмите Enter");
@@ -101,7 +114,7 @@ namespace CreativeDZ_23_09
                 {
                     Console.WriteLine("Patron Tequila");
                 }
-                else if (Regex.IsMatch(str,@"(?i)^School Counselor$"))
+                else if (Regex.IsMatch(str, @"(?i)^School Counselor$"))
                 {
                     Console.WriteLine("Anything with Alcohol");
                 }
@@ -109,7 +122,7 @@ namespace CreativeDZ_23_09
                 {
                     Console.WriteLine("Hipster Craft Beer");
                 }
-                else if (Regex.IsMatch(str,@"(?i)^Bike Gang Member$"))
+                else if (Regex.IsMatch(str, @"(?i)^Bike Gang Member$"))
                 {
                     Console.WriteLine("Moonshine");
                 }
@@ -122,7 +135,8 @@ namespace CreativeDZ_23_09
                     Console.WriteLine("Cristal");
                 }
                 else { Console.WriteLine("Beer"); }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 Console.WriteLine("Неизвестная ошибка");
                 Console.WriteLine("Нажмите Enter");
@@ -141,57 +155,33 @@ namespace CreativeDZ_23_09
                 day = int.Parse(Console.ReadLine());
                 if (day < 1 || day > 7)
                 {
-                    throw new ArgumentException("Неправильное значение дня. Значение дня должно быть от 1 до 7");
+                    throw new ArgumentException("Неправильное значение дня недели. Значение дня должно быть от 1 до 7");
                 }
-                if (day == 1)
-                {
-                    Console.WriteLine("Это Понедельник");
-                }
-                else if (day == 2)
-                {
-                    Console.WriteLine("Это Вторник");
-                }
-                else if (day == 3)
-                {
-                    Console.WriteLine("Это Среда");
-                }
-                else if (day == 4)
-                {
-                    Console.WriteLine("Это Четверг");
-                }
-                else if (day == 5)
-                {
-                    Console.WriteLine("Это Пятница");
-                }
-                else if (day == 6)
-                {
-                    Console.WriteLine("Это Суббота");
-                }
-                else { Console.WriteLine("Это Воскресенье"); }
             }
             catch (FormatException)
             {
-                Console.WriteLine("Неправильное значение дня. Должно быть число");
+                Console.WriteLine("Неправильное значение дня недели. Должно быть число");
                 Console.WriteLine("Нажмите Enter");
                 Console.ReadKey();
                 return;
             }
             catch (ArgumentException)
             {
-                Console.WriteLine("Неправильное значение дня. Значение дня должно быть от 1 до 365");
+                Console.WriteLine("Неправильное значение дня недели. Значение дня должно быть от 1 до 365");
                 Console.WriteLine("Нажмите Enter");
                 Console.ReadKey();
                 return;
             }
-            finally
-            {
-                Console.WriteLine("Нажмите Enter");
-                Console.ReadKey();
-            }
-            Console.WriteLine("Задание 5: Поиск кукол в массиве ");
+            DayOfWeek dayofweek = (DayOfWeek)day;
+            Console.WriteLine($"Название дня недели: {dayofweek.ToString()}");
+            Console.WriteLine("Нажмите Enter");
+            Console.ReadKey();
+
+            Console.WriteLine("Задание 5: Поиск кукол в массиве: ");
             string[] dolls = new string[] { "Hello Kitty", "Lego", "My little Pony", "Ninja Turtles", "Barbie doll", "Steve from Minecraft" };
             int count = 0;
-            Console.WriteLine(dolls);
+            string listdolls = string.Join(", ", dolls);
+            
             foreach (string doll in dolls)
             {
                 if (doll == "Hello Kitty" || doll == "Barbie doll")
@@ -199,6 +189,7 @@ namespace CreativeDZ_23_09
                     count++;
                 }
             }
+            Console.WriteLine(listdolls);
             Console.WriteLine($"Кол-во кукол в сумке {count}");
 
             Console.WriteLine("Нажмите Enter");
